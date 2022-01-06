@@ -18,9 +18,9 @@ class CreateCoursesTable extends Migration
             $table->foreignId('category_id')->nullable()->references('id')->on('categories')->onDelete('SET NULL');
             $table->string('name', 60);
             $table->text('description');
-            $table->integer('rating');
-            $table->integer('views');
-            $table->enum('levels', ['beginner', 'intermediate', 'high']);
+            $table->integer('rating')->nullable()->default(0);
+            $table->integer('views')->nullable()->default(0);
+            $table->enum('level', ['beginner', 'intermediate', 'high']);
             $table->boolean('active')->default(1);
             $table->timestamps();
         });
