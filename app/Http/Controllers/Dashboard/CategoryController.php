@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreCategoryRequest;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -33,9 +35,16 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCategoryRequest $request)
     {
-        //
+        // get validated data
+        $data = $request->validated();
+
+        // save category data
+        Category::create($data);
+
+        session()->flash('status', 'Category created successfully!');
+        return redirect()->route('dashboard.categories.index');
     }
 
     /**
@@ -67,9 +76,16 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreCategoryRequest $request, Category $category)
     {
-        //
+        // get validated data
+        $data = $request->validated();
+
+        // update category data
+        $category->update($data);
+
+        session()->flash('status', 'Category updated successfully!');
+        return redirect()->route('dashboard.categories.index');
     }
 
     /**
@@ -78,8 +94,11 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        //
+        $category->delete();
+
+        session()->flash('status', 'Category deleted successfully!');
+        return redirect()->route('dashboard.categories.index');
     }
 }

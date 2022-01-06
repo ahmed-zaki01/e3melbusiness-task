@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreCourseRequest;
+use App\Models\Course;
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
@@ -33,9 +35,16 @@ class CourseController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreCourseRequest $request)
     {
-        //
+        // get validated data
+        $data = $request->validated();
+
+        // save category data
+        Category::create($data);
+
+        session()->flash('status', 'Course created successfully!');
+        return redirect()->route('dashboard.courses.index');
     }
 
     /**
@@ -67,9 +76,16 @@ class CourseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreCourseRequest $request, Course $course)
     {
-        //
+        // get validated data
+        $data = $request->validated();
+
+        // update category data
+        $category->update($data);
+
+        session()->flash('status', 'Course updated successfully!');
+        return redirect()->route('dashboard.courses.index');
     }
 
     /**
@@ -78,8 +94,11 @@ class CourseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Course $course)
     {
-        //
+        $course->delete();
+
+        session()->flash('status', 'Course deleted successfully!');
+        return redirect()->route('dashboard.courses.index');
     }
 }
