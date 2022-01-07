@@ -23,10 +23,10 @@ Route::prefix('dashboard')->name('dashboard.')->group(function () {
         Route::get('/logout', 'DashboardController@logout')->name('logout');
 
         // categories resource
-        Route::resource('categories', 'CategoryController');
+        Route::resource('categories', 'CategoryController')->except('show');
 
         // courses resource
-        Route::resource('courses', 'CourseController');
+        Route::resource('courses', 'CourseController')->except('show');
 
     });
 });

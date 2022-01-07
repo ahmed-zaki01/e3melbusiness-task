@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="{{__('dashboard.lang')}}">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
 
-    <title>{{ __('dashboard.fab_minds') }} | {{ !empty($title) ? $title : __('dashboard.dashboard') }}</title>
+    <title>{{ !empty($title) ? $title : __('dashboard.dashboard') }}</title>
     <link rel="shortcut icon" href="{{asset('dashboard_files/dist/img/logo.png')}}" type="image/x-icon">
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,17 +17,9 @@
 
     <!-- Noty -->
     <link rel="stylesheet" href="{{asset('dashboard_files/plugins')}}/noty/noty.min.css">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
-
     <script src="{{asset('dashboard_files')}}/plugins/noty/noty.min.js"></script>
 
-    @if ( __('dashboard.dir') == 'rtl' )
-    <!-- Bootstrap 4 RTL -->
-    <link rel="stylesheet" href="https://cdn.rtlcss.com/bootstrap/v4.2.1/css/bootstrap.min.css" crossorigin="anonymous">
-    <!-- Custom style for RTL -->
-    <link rel="stylesheet" href="{{asset('dashboard_files')}}/dist/css/rtlcustom.css">
-    @endif
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source%20Sans%20Pro%3A300%2C400%2C400i%2C700">
@@ -77,7 +69,4 @@
             color: white;
         }
     </style>
-    <script type="text/javascript">
-        const lang = "{{ __('dashboard.lang') }}"
-    </script>
 </head>

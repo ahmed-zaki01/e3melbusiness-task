@@ -1,4 +1,4 @@
-@extends('layouts.dashboard.app', ['title' => __('dashboard.create').' '.__('dashboard.onboarding')])
+@extends('layouts.dashboard.app', ['title' => 'Create Category'])
 
 @section('content')
 
@@ -8,42 +8,42 @@
 
     <div class="card-header">
         <div class="d-flex justify-content-between">
-            <h3 class="card-title mt-2"><i class="fa fa-map-marker mr-1"></i> {{ __('dashboard.new_onboarding') }}</h3>
-            <a href="{{ url()->previous() }}" class="btn {{ __('dashboard.lang') == 'en' ? 'btn-default text-dark': 'back-btn-ar'}}">
-                <i class="fas fa-arrow-left mr-2"></i> {{ __('dashboard.back') }}
+            <h3 class="card-title mt-2"><i class="fa fa-map-marker mr-1"></i> New Category</h3>
+            <a href="{{ url()->previous() }}" class="btn btn-default text-dark">
+                <i class="fas fa-arrow-left mr-2"></i> Back
             </a>
         </div>
     </div> <!-- /.card-header -->
     <!-- form start -->
-    <form action="{{ route('dashboard.settings.onboarding.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('dashboard.categories.store') }}" method="POST">
         @csrf
         <div class="card-body">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="name" class="required">Name:</label>
+                        <input type="text" name="name" value="{{ old('name') }}" class="form-control" id="name">
+                    </div>
+                </div>
+            </div>
 
             <div class="row">
                 <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="message_en" class="required">{{ __('dashboard.message_en') }}</label>
-                        <textarea name="message_en" class="form-control" id="message_en">{{ old('message_en') }}</textarea>
+                    <div class="form-group clearfix">
+                        <label class="mr-4 required">Active:</label>
+                        <div class="icheck-primary d-inline">
+                            <input type="radio" id="enabled" name="active" value="1" checked>
+                            <label for="enabled">Yes</label>
+                        </div>
+                        <div class="icheck-danger ml-2 d-inline">
+                            <input type="radio" id="disabled" name="active" value="0">
+                            <label for="disabled">No</label>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="message_ar" class="required">{{ __('dashboard.message_ar') }}</label>
-                        <textarea name="message_ar" class="form-control" id="message_ar">{{ old('message_ar') }}</textarea>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="ordering" class="required">{{ __('dashboard.ordering') }}</label>
-                        <input type="number" name="ordering" value="{{ $count }}" class="form-control" id="ordering">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
+
+            {{-- <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label for="image" class="required"> {{ __('dashboard.image') }}</label>
@@ -59,8 +59,8 @@
                         <img src style="height: 100px;" class="img-thumbnail img-preview" alt="onboarding image">
                     </div>
                 </div>
-            </div>
-            <button type="submit" class="btn btn-primary text-uppercase font-weight-bold">{{ __('dashboard.save') }}</button>
+            </div> --}}
+            <button type="submit" class="btn btn-primary text-uppercase font-weight-bold">Save</button>
         </div>
         <!-- /.card-body -->
     </form>

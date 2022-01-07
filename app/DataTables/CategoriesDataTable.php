@@ -23,7 +23,7 @@ class CategoriesDataTable extends DataTable
             ->eloquent($query)
             ->addColumn('active', 'dashboard.categories.active')
             ->addColumn('actions', 'dashboard.categories.actions')
-            ->rawColumns(['actions']);
+            ->rawColumns(['active', 'actions']);
     }
 
     /**

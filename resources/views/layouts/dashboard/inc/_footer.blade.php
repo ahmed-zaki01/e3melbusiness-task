@@ -7,11 +7,8 @@
     $.widget.bridge('uibutton', $.ui.button)
 </script>
 <!-- Bootstrap 4 -->
---<script src="{{asset('dashboard_files')}}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-@if ( __('dashboard.dir') == 'rtl' )
-<!-- Bootstrap 4 rtl -->
-<script src="https://cdn.rtlcss.com/bootstrap/v4.2.1/js/bootstrap.min.js"></script>
-@endif
+<script src="{{asset('dashboard_files')}}/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
 
 <!-- AdminLTE App -->
 <script src="{{asset('dashboard_files')}}/dist/js/adminlte.min.js"></script>
