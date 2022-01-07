@@ -23,6 +23,7 @@ class CreateCoursesTable extends Migration
             $table->enum('level', ['beginner', 'intermediate', 'high']);
             $table->boolean('active')->default(1);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

@@ -6,7 +6,7 @@
               <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
           </li>
           <li class="nav-item d-none d-sm-inline-block">
-              <a href="{{ route('dashboard.index') }}" class="nav-link">{{ __('dashboard.home') }}</a>
+              <a href="{{ route('dashboard.index') }}" class="nav-link">Home</a>
           </li>
 
       </ul>
@@ -15,22 +15,13 @@
       <ul class="navbar-nav ml-auto">
           <li class="nav-item">
               <div class="d-lg-block d-none dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">{{ __('dashboard.language') }}</a>
-                  <div class="dropdown-menu">
-                      <a class="dropdown-item" href="{{ route('dashboard.lang','ar') }}"><span class="flag-icon flag-icon-sa"></span> {{ __('dashboard.arabic') }}</a>
-                      <a class="dropdown-item" href="{{ route('dashboard.lang','en') }}"><span class="flag-icon flag-icon-us"></span> {{ __('dashboard.english') }}</a>
-                  </div>
-              </div>
-          </li>
-          <li class="nav-item">
-              <div class="d-lg-block d-none dropdown">
                   <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">{{ auth()->user()->name }}</a>
                   <div class="dropdown-menu">
                   <a class="nav-link" href="{{ route('dashboard.profile') }}">
-                          <i class="fa fa-cog"></i> {{ __('dashboard.edit_my_profile') }}
+                          <i class="fa fa-cog"></i> Edit Profile
                       </a>
                       <a class="nav-link" href="{{ route('dashboard.logout') }}">
-                          <i class="fa fa-sign-out-alt"></i> {{ __('dashboard.logout') }}
+                          <i class="fa fa-sign-out-alt"></i> Logout
                       </a>
                   </div>
               </div>

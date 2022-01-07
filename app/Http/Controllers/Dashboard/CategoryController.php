@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\DataTables\CategoriesDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Models\Category;
@@ -14,9 +15,9 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(CategoriesDataTable $dataTable)
     {
-        //
+        return $dataTable->render('dashboard.categories.index');
     }
 
     /**
