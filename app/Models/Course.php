@@ -11,4 +11,15 @@ class Course extends Model
     use HasFactory, SoftDeletes;
 
     protected $guarded = ['id'];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    } // end of category method
+
+    public function setImageAttribute($image)
+    {
+        $image->store('courses', 'public');
+        $this->attributes['image'] = $image->hashName();
+    } // end of setImageAttribute method
 }

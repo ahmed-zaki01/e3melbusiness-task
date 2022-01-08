@@ -21,7 +21,9 @@ class CoursesDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'courses.action');
+            ->addColumn('active', 'dashboard.courses.active')
+            ->addColumn('actions', 'dashboard.courses.actions')
+            ->rawColumns(['active', 'actions']);
     }
 
     /**
@@ -32,7 +34,7 @@ class CoursesDataTable extends DataTable
      */
     public function query(Course $model)
     {
-        return $model->newQuery();
+        return $model->with('category')->newQuery()->select('courses.*');
     }
 
     /**
@@ -43,18 +45,19 @@ class CoursesDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('courses-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    ->dom('Bfrtip')
-                    ->orderBy(1)
-                    ->buttons(
-                        Button::make('create'),
-                        Button::make('export'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    );
+            ->setTableId('courses-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            ->dom('Bfrtip')
+            ->orderBy(0, 'desc')
+            ->lengthMenu([[10, 25, 50, 100, -1], [10, 25, 50, 100,  'All']])
+            ->parameters([
+                'dom' => 'Blfrtip',
+            ])
+            ->buttons(
+                Button::make('excel')->text('Excel'),
+                Button::make('print')->text('Print'),
+            )->language(['url' => 'https://cdn.datatables.net/plug-ins/1.10.25/i18n/English.json']);
     }
 
     /**
@@ -65,15 +68,15 @@ class CoursesDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
-            Column::make('id'),
-            Column::make('add your columns'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+            Column::make('name')->addClass('text-center')->title('Name'),
+            Column::make('category.name')->addClass('text-center')->title('Category'),
+            Column::make('level')->addClass('text-center')->title('Level'),
+            Column::make('hours')->addClass('text-center')->title('Hours'),
+            Column::make('active')->addClass('text-center')->title('Active'),
+            Column::computed('actions')
+                ->exportable(false)
+                ->printable(false)
+                ->addClass('text-center')->title('Actions'),
         ];
     }
 

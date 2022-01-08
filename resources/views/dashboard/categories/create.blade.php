@@ -43,23 +43,6 @@
                 </div>
             </div>
 
-            {{-- <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="image" class="required"> {{ __('dashboard.image') }}</label>
-                        <div class="input-group">
-                            <div class="custom-file">
-                                <input type="file" name="image" class="custom-file-input img-input" id="image">
-                                <label class="custom-file-label" for="image">{{ __('dashboard.choose_file') }}</label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group mt-2 d-none img-preview-container">
-                        <img src style="height: 100px;" class="img-thumbnail img-preview" alt="onboarding image">
-                    </div>
-                </div>
-            </div> --}}
             <button type="submit" class="btn btn-primary text-uppercase font-weight-bold">Save</button>
         </div>
         <!-- /.card-body -->

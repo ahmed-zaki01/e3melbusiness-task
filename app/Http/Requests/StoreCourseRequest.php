@@ -33,12 +33,12 @@ class StoreCourseRequest extends FormRequest
     {
         return [
             'category_id' => 'required|exists:categories,id',
-            'name' => 'required|string|unique:categories|max:60',
+            'name' => 'required|string|unique:courses|max:60',
             'description' => 'required|string',
             'hours' => 'required|integer',
             'level' => ['required', Rule::in(['beginner', 'intermediate', 'high'])],
             'active' => 'required|boolean',
-            'image' => 'nullable|string',
+            'image' => 'required|image|mimes:png,jpg,jpeg,gif',
             'rating' => 'nullable|integer',
             'views' => 'nullable|integer',
         ];

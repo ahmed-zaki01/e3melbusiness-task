@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use App\DataTables\CoursesDataTable;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreCourseRequest;
+use App\Models\Category;
 use App\Models\Course;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CourseController extends Controller
 {
@@ -14,9 +17,9 @@ class CourseController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(CoursesDataTable $dataTable)
     {
-        //
+        return $dataTable->render('dashboard.courses.index');
     }
 
     /**
@@ -26,7 +29,8 @@ class CourseController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::select('id', 'name')->get();
+        return view('dashboard.courses.create', compact('categories'));
     }
 
     /**
@@ -41,21 +45,12 @@ class CourseController extends Controller
         $data = $request->validated();
 
         // save category data
-        Category::create($data);
+        Course::create($data);
+
+
 
         session()->flash('status', 'Course created successfully!');
         return redirect()->route('dashboard.courses.index');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
@@ -64,9 +59,10 @@ class CourseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Course $course)
     {
-        //
+        $categories = Category::select('id', 'name')->get();
+        return view('dashboard.courses.edit', compact('course', 'categories'));
     }
 
     /**
@@ -81,8 +77,13 @@ class CourseController extends Controller
         // get validated data
         $data = $request->validated();
 
+        // remove image in update
+        if (!empty($data['image'])) {
+            Storage::disk('public')->delete('courses/' . $course->image);
+        }
+
         // update category data
-        $category->update($data);
+        $course->update($data);
 
         session()->flash('status', 'Course updated successfully!');
         return redirect()->route('dashboard.courses.index');
@@ -96,6 +97,11 @@ class CourseController extends Controller
      */
     public function destroy(Course $course)
     {
+        // remove image in delete
+        if (!empty($course->image)) {
+            Storage::disk('public')->delete('courses/' . $course->image);
+        }
+
         $course->delete();
 
         session()->flash('status', 'Course deleted successfully!');
