@@ -42,12 +42,12 @@ return [
 
         'client' => [
             'driver' => 'session',
-            'provider' => 'clients',
+            'provider' => 'users',
         ],
 
         'mobile' => [
             'driver' => 'sanctum',
-            'provider' => 'clients',
+            'provider' => 'users',
         ],
     ],
 
