@@ -15,7 +15,7 @@
       <ul class="navbar-nav ml-auto">
           <li class="nav-item">
               <div class="d-lg-block d-none dropdown">
-                  <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">{{ auth()->guard('admins')->user()->name }}</a>
+                  <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown">{{ auth()->guard('admin')->user()->name }}</a>
                   <div class="dropdown-menu">
                   <a class="nav-link" href="{{ route('dashboard.profile') }}">
                           <i class="fa fa-cog"></i> Edit Profile

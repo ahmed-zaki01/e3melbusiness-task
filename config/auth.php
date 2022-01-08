@@ -14,7 +14,7 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'clients',
+        'guard' => 'admins',
     ],
 
     /*
@@ -35,12 +35,12 @@ return [
     */
 
     'guards' => [
-        'admins' => [
+        'admin' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'admins',
         ],
 
-        'clients' => [
+        'client' => [
             'driver' => 'session',
             'provider' => 'clients',
         ],
@@ -74,9 +74,9 @@ return [
             'model' => App\Models\User::class,
         ],
 
-        'clients' => [
+        'admins' => [
             'driver' => 'eloquent',
-            'model' => App\Models\Client::class,
+            'model' => App\Models\Admin::class,
         ],
 
         // 'users' => [

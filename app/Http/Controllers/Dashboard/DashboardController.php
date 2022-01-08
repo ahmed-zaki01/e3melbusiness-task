@@ -17,20 +17,20 @@ class DashboardController extends Controller
 
     public function logout()
     {
-        auth()->guard('admins')->logout();
+        auth()->guard('admin')->logout();
         session()->flash('status', 'You have been logged out successfully!');
         return redirect(route('dashboard.login'));
     } // end of logout method
 
     public function profile()
     {
-        $user = auth()->guard('admins')->user();
+        $user = auth()->guard('admin')->user();
         return view('dashboard.users.profile', compact('user'));
     } // end of profile method
 
     public function updateProfile(Request $request)
     {
-        $user = User::find(auth()->guard('admins')->user()->id);
+        $user = User::find(auth()->guard('admin')->user()->id);
         $data = $request->validate([
             'name' => 'required|string|max:80',
             'email' => ['required', 'email', Rule::unique('users', 'email')->ignore($user->id, 'id')],
@@ -54,7 +54,7 @@ class DashboardController extends Controller
 
         // if password update redirect to login
         if ($user->password !== $oldPassword) {
-            auth()->guard('admins')->logout();
+            auth()->guard('admin')->logout();
             return redirect(route('dashboard.login'));
         } else {
             return redirect(route('dashboard.index'));
