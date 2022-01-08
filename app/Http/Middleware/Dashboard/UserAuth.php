@@ -16,7 +16,7 @@ class UserAuth
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!auth()->guard('web')->check()) {
+        if (!auth()->guard('admins')->check()) {
             return redirect(route('dashboard.login'));
         }
 

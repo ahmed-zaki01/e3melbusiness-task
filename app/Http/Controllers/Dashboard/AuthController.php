@@ -14,7 +14,7 @@ class AuthController extends Controller
 
     public function attempt(Request $request)
     {
-        $checkAuth = auth()->attempt(['email' => $request->email, 'password' => $request->password]);
+        $checkAuth = auth()->guard('admins')->attempt(['email' => $request->email, 'password' => $request->password]);
 
         if (!$checkAuth) {
             session()->flash('error', 'Wrong data!');
